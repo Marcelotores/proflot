@@ -1,0 +1,5 @@
+suites:
+    main:
+        namespace: Proflot
+        psr4_prefix: Proflot
+        src_path: app
