@@ -12,12 +12,11 @@
 */
 
 
-
 Route::group(['prefix'=>'admin', 'as'=>'admin.'], function(){
 
 	Route::get('', function () {
-    return view('menu');
-});
+		return view('menu');
+	});
 
 /*-----------------------------Disciplinas------------------------------------------------------------------*/
 Route::get('disciplinas/index',['as'=>'disciplinas.index', 'uses'=>'DisciplinaController@index']);
@@ -29,14 +28,14 @@ Route::get('disciplinas/destroy/{id}',['as'=>'disciplinas.destroy', 'uses'=>'Dis
 Route::get('disciplinas/show/{id}',['as'=>'disciplinas.show', 'uses'=>'DisciplinaController@show']);
 
 //Retorna as disciplinas por periodo
-Route::get('disciplinas/periodo/{id}',
-	['as'=>'disciplinas.periodo', 'uses'=>'DisciplinaController@getDisciplinasByPeriodo']);
+Route::get('disciplinas/periodo/{id}',['as'=>'disciplinas.periodo', 'uses'=>'DisciplinaController@getDisciplinasByPeriodo']);
 
 
 /*----------------------------Lotacao-------------------------------------------------------------------*/
 Route::get('turmas/index',['as'=>'turmas.index', 'uses'=>'TurmaController@index']);
 Route::get('turmas/novo',['as'=>'turmas.create', 'uses'=>'TurmaController@create']);
 Route::post('turmas/store',['as'=>'turmas.store', 'uses'=>'TurmaController@store']);
+Route::get('turmas/remove/{id}',['as'=>'turmas.destroy', 'uses'=>'TurmaController@destroy']);
 
 
 /*---------------------------------UserProfessor------------------------------------------------------------------*/
