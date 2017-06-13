@@ -53,6 +53,18 @@ Route::get('entrar',['as'=>'login.index', 'uses'=>'LoginController@index']);
 
 
 
+/*---------------------------------UserProfessor------------------------------------------------------------------*/
+
+Route::get('salas/index',['as'=>'salas.index', 'uses'=>'SalasController@index']);
+Route::get('salas/create',['as'=>'salas.create', 'uses'=>'SalasController@create']);
+Route::post('salas/store',['as'=>'salas.store', 'uses'=>'SalasController@store']);
+Route::get('salas/editar/{id}',['as'=>'salas.edit', 'uses'=>'SalasController@edit']);
+Route::post('salas/update/{id}',['as'=>'salas.update', 'uses'=>'SalasController@update']);
+Route::get('salas/statu/{id}',['as'=>'salas.status', 'uses'=>'SalasController@status']);
+Route::get('salas/show/{id}',['as'=>'salas.show', 'uses'=>'SalasController@show']);
+
+
+
 /*----------------------------Coordenadores-------------------------------------------------------------------*/
 Route::get('coordenadores/index',['as'=>'coordenadores.index', 'uses'=>'CoordenadorController@index']);
 Route::get('coordenadores/novo',['as'=>'coordenadores.create', 'uses'=>'CoordenadorController@create']);
