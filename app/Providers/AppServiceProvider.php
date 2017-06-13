@@ -47,7 +47,7 @@ class AppServiceProvider extends ServiceProvider
         );
 
         $this->app->bind(
-            'rProflot\Repositories\FluxoRepository',
+            'Proflot\Repositories\FluxoRepository',
             'Proflot\Repositories\FluxoRepositoryEloquent'
         );
 
@@ -110,6 +110,12 @@ class AppServiceProvider extends ServiceProvider
             'Proflot\Repositories\DiaHorarioTurmaRepository',
             'Proflot\Repositories\DiaHorarioTurmaRepositoryEloquent'
         );
+
+        $this->app->bind(
+            'Proflot\Repositories\SolicitarRepository',
+            'Proflot\Repositories\SolicitarRepositoryEloquent'
+        );
+
 
     }
 }

@@ -9,10 +9,14 @@
            @include('errors._errors')
            
               <div class="col-xs-12 col-md-8">
-                {!! Form::open(['route'=>'admin.turmas.store','class'=>'form']) !!}
+                {!! Form::model($periodo, ['route'=>'admin.turmas.store','class'=>'form']) !!}
 
-                    @include('admin.turmas._form') <!-- Refatorando o form --> 
+                    @include('admin.turmas._form2') <!-- Refatorando o form --> 
 
+                   <div class="forme-grup">
+                    {!! Form::submit('Salvar',['class'=>'btn btn-primary']) !!}
+                    
+                  </div> 
                   
                 {!! Form::close() !!}
                  
@@ -20,6 +24,7 @@
 
         </div>
 </div>   
+
 
 
 @endsection

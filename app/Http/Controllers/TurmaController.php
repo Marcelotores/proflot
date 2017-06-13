@@ -55,15 +55,26 @@ class TurmaController extends Controller
      */
     public function index()
     {
-        $turma = Turma::find(1);
 
-        foreach ($turma->dias as $d) {
-            echo $d->dia;
+        $turmas = $this->repository->all();
+/*
+        $tur = $this->repository->find(8);
+
+        foreach ($tur->dias as $t) {
+            echo $t->id;
+            $di = $this->diaRepository->find($t->id);
+            foreach ($di->horarios as $horarios) {
+                echo $horarios->letra;
+            }
+            echo "<br>";
+
         }
-        
 
-  
-        //return $turma->dias();
+  */     
+       // $dias = $this->diaRepository->getDias('dia', 'id');
+       // $horarios = $this->horarioRepository->getAllHorarios();
+
+        return view('admin.turmas.index', compact('turmas'));
     }
 
     /**
@@ -78,10 +89,10 @@ class TurmaController extends Controller
         $users = $this->userRepository->getUsersByCurso('name', 'id');
         $salas = $this->salaRepository->getSalasByCurso('number', 'id');
         $dias = $this->diaRepository->getDias('dia', 'id');
-        $horarios = $this->horarioRepository->getHorarios('id', 'letra');
-        $horarioss = $this->horarioRepository->getAllHorarios();
+        //$horarios = $this->horarioRepository->getHorarios('id', 'letra');
+        $horarios = $this->horarioRepository->getAllHorarios();
 
-        return view('admin.turmas.create', compact('periodos', 'disciplinas', 'users', 'salas', 'dias', 'horarioss'));
+        return view('admin.turmas.create', compact('periodos', 'disciplinas', 'users', 'salas', 'dias', 'horarios'));
     }
 
     /**
@@ -94,28 +105,28 @@ class TurmaController extends Controller
     {
         $data = $request->except('periodo_id');
 
+        $periodo = $request->input('periodo_id');
+
+
         //Pegar valores do dia e hora
         $dia = $request->input('dia');
         $horarios = $request->input('letra');
-/*
-        foreach ($horarios as $horario) {
-            echo $horario;
-        }
+        $sala = $request->input('sala_id');
 
-
-*/
         
         $turma = new Turma($data);
         $turma->save();
 
 
-        $teste = $this->repository->dia_turma_horario($dia, $horarios, $turma->id);
-
-        return redirect()->route('admin.turmas.create');
+        $teste = $this->repository->dia_turma_horario($dia, $horarios, $turma->id, $sala);
 
 
 
-
+        if (empty($teste)) {
+           return  redirect()->route('admin.turmas.index');
+        }else {
+            echo $teste;
+        }
 
     }
 

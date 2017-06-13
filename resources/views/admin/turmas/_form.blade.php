@@ -1,40 +1,8 @@
-
-
-
-    <style type="text/css">
-      .carregando{
-        color:#ff0000;
-        display:none;
-      }
-    </style>
-
-
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
-    <script >
-        $(function(){
-        $('#periodo_id').change(function(){
-          if( $(this).val() ) {
-            $('#disciplina_id').hide();
-            $('.carregando').show();
-            
-            $.get("/admin/disciplinas/periodo/" + $(this).val(), function(data, status){
-              var options = '<option value="">Escolha a disciplina</option>'; 
-              for (var i = 0; i < data.length; i++) {
-                options += '<option value=' + data[i].id + '>' + data[i].name + '</option>';
-              }
-
-              $('#disciplina_id').html(options).show();
-              $('.carregando').hide();
-
-            });
-          } 
-
-        });
-      });
-    </script>
-    
-
+    <script src="{{ URL::asset('lib/jquery-3.2.1.js') }}"></script>
+    <script src="{{ URL::asset('js/carrega_disciplinas.js') }}"> </script>
+    <script src="{{ URL::asset('js/modal_horarios.js') }}"> </script>
+    <link rel="stylesheet" href="{{ URL::asset('css/style.css') }}">
 
 
     {!! Form::label('Periodo','Período:') !!}
@@ -43,16 +11,13 @@
       <option value="">
         Escolha o Período
       </option> 
-      <?php
-      foreach ($periodos as $periodo):
-        ?>
+      <?php foreach ($periodos as $periodo): ?>
       <option value="<?= $periodo->id ?>">
         <?= $periodo->description ?></br>
       </option> 
-      <?php
-      endforeach;
-      ?>
+      <?php endforeach?>
     </select>
+
 
     {!! Form::label('Disciplina','Disciplina:') !!}
     <span class="carregando">Aguarde, carregando...</span>
@@ -85,26 +50,57 @@
 
  <hr>
 
- <div class="forme-grup">
-  {!! Form::label('Dia','Dia:') !!}
-  {!! Form::select('dia', $dias, null,['class'=>'form-control', 'placeholder' => 'Escolha o Dia']) !!}
- </div>
+
+
+  <!-- Segunda seção -->
+
+
+
+
+
+
+<a href="#janela1" rel="modal">Setar horários</a>
+ 
+<div class="window" id="janela1">
+    <a href="#" class="fechar">X Fechar</a>
+
+    <h4>Escolha os dias e horários</h4>
+    <div class="forme-grup">
+      {!! Form::label('Dia','Dia:') !!}
+      {!! Form::select('dia', $dias, null,['class'=>'form-control', 'placeholder' => 'Escolha o Dia']) !!}
+    </div>
+
+    <br>
+
+    {!! Form::label('Horario','Horários:') !!}
+    <br>
+    @foreach($horarios as $horario)
+    <div class="forme-grup">
+      <input type="checkbox" name="letra[]" value="{{$horario->id}}" />
+      {{$horario->letra}} - {{$horario->start_time}} às {{$horario->end_time}}<br /> 
+    </div>
+    @endforeach
+<br>
+    <div class="forme-grup">
+      {!! Form::submit('Salvar',['class'=>'btn btn-primary']) !!}
+    </div> 
+                  
+    
+
+
+</div>
+
+<div id="mascara"></div>
 
 
 
 <br>
 
-{!! Form::label('Horario','Horários:') !!}
-<br>
-@foreach($horarioss as $horario)
-  <div class="forme-grup">
-  <input type="checkbox" name="letra[]" value="{{$horario->id}}" /> {{$horario->letra}}<br /> 
-  </div>
-  @endforeach
 
+ 
+ 
+<!-- mascara para cobrir o site -->  
 
-</select>
-<br>
 
    
 

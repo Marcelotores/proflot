@@ -42,4 +42,10 @@ class DisciplinaRepositoryEloquent extends BaseRepository implements DisciplinaR
         return $disciplinas;
     }
 
+
+
+    public function lists($value, $key = null){
+        return $this->model->lists('name', 'id');
+    }
+
 }

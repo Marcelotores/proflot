@@ -33,7 +33,7 @@
                                <td>{{$coordenador->email}}</td>
                                <td>{{$coordenador->phone}}</td>
                                <td>{{$coordenador->regiment}}</td>
-                               <td>{{$coordenador->tipos_id}}</td>
+                               <td>{{$coordenador->tipo_id}}</td>
 
                                <td><a href="{{ route('admin.professores.edit',['id'=>$coordenador->id])}}"><button type="button" class="btn btn-primary">Editar</button></a></td>
                                 <td><a href="{{ route('admin.professores.show',['id'=>$coordenador->id])}}"><button type="button" class="btn btn-success">Visualizar</button></a></td>

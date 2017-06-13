@@ -11,11 +11,13 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
 
 Route::group(['prefix'=>'admin', 'as'=>'admin.'], function(){
+
+	Route::get('', function () {
+    return view('menu');
+});
 
 /*-----------------------------Disciplinas------------------------------------------------------------------*/
 Route::get('disciplinas/index',['as'=>'disciplinas.index', 'uses'=>'DisciplinaController@index']);
@@ -36,7 +38,9 @@ Route::get('turmas/index',['as'=>'turmas.index', 'uses'=>'TurmaController@index'
 Route::get('turmas/novo',['as'=>'turmas.create', 'uses'=>'TurmaController@create']);
 Route::post('turmas/store',['as'=>'turmas.store', 'uses'=>'TurmaController@store']);
 
-/*----------------------------User-------------------------------------------------------------------*/
+
+/*---------------------------------UserProfessor------------------------------------------------------------------*/
+
 Route::get('users/index',['as'=>'users.index', 'uses'=>'UserController@index']);
 Route::get('users/create',['as'=>'users.create', 'uses'=>'UserController@create']);
 Route::post('users/store',['as'=>'users.store', 'uses'=>'UserController@store']);
@@ -44,9 +48,33 @@ Route::get('users/editar/{id}',['as'=>'users.edit', 'uses'=>'UserController@edit
 Route::post('users/update/{id}',['as'=>'users.update', 'uses'=>'UserController@update']);
 Route::get('users/statu/{id}',['as'=>'users.status', 'uses'=>'UserController@status']);
 Route::get('users/show/{id}',['as'=>'users.show', 'uses'=>'UserController@show']);
+
+
 Route::get('entrar',['as'=>'login.index', 'uses'=>'LoginController@index']);
 
 
+
+/*----------------------------Coordenadores-------------------------------------------------------------------*/
+Route::get('coordenadores/index',['as'=>'coordenadores.index', 'uses'=>'CoordenadorController@index']);
+Route::get('coordenadores/novo',['as'=>'coordenadores.create', 'uses'=>'CoordenadorController@create']);
+Route::post('coordenadores/update',['as'=>'coordenadores.update', 'uses'=>'CoordenadorController@update']);
+Route::get('coordenadores/editar/{id}',['as'=>'coordenadores.edit', 'uses'=>'AlunoController@edit']);
+Route::post('coordenadores/update/{id}',['as'=>'coordenadores.update', 'uses'=>'AlunoController@update']);
+Route::get('coordenadores/destroy/{id}',['as'=>'coordenadores.destroy', 'uses'=>'CoordenadorController@destroy']);
+Route::get('coordenadores/show/{id}',['as'=>'coordenadores.show', 'uses'=>'AlunoController@show']);
+Route::get('coordenadores/solicitar',['as'=>'coordenadores.solicitar', 'uses'=>'CoordenadorController@solicita']);
+Route::post('coordenadores/storesolicita',['as'=>'coordenadores.storesolicita', 'uses'=>'CoordenadorController@storesolicita']);
+Route::get('coordenadores/solicita/mostra',['as'=>'coordenadores.solicita.mostra', 'uses'=>'CoordenadorController@mostra']);
+Route::get('coordenadores/visualizar/solicita/{id}',['as'=>'coordenadores.visualizar.solicita', 'uses'=>'CoordenadorController@visualiza']);
+
+/*-----------------------------Professores----------------------------------------------------------*/
+Route::get('professores/index',['as'=>'professores.index', 'uses'=>'ProfessorController@index']);
+Route::get('professores/novo',['as'=>'professores.create', 'uses'=>'ProfessorController@create']);
+Route::post('professores/store',['as'=>'professores.store', 'uses'=>'ProfessorController@store']);
+Route::get('professores/editar/{id}',['as'=>'professores.edit', 'uses'=>'ProfessorController@edit']);
+Route::post('professores/update/{id}',['as'=>'professores.update', 'uses'=>'ProfessorController@update']);
+Route::get('professores/destroy/{id}',['as'=>'professores.destroy', 'uses'=>'ProfessorController@destroy']);
+Route::get('professores/show/{id}',['as'=>'professores.show', 'uses'=>'ProfessorController@show']);
 
 
 });
@@ -54,3 +82,8 @@ Route::get('entrar',['as'=>'login.index', 'uses'=>'LoginController@index']);
 
 Route::resource('login','LoginController@store');
 Route::get('logout','LoginController@logout');
+
+
+
+
+

@@ -38,4 +38,11 @@ class CursoRepositoryEloquent extends BaseRepository implements CursoRepository
     public function lists ($value, $key = null) {
        return $this->model->lists('description', 'id');
    }
+
+    public function not_curso_coord () {
+        $cursos = DB::table('cursos')
+        ->where('id', '<>',Auth::user()->curso_id)
+        ->lists('description', 'id');
+        return $cursos;
+    }
 }
