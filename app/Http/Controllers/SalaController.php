@@ -6,9 +6,19 @@ use Illuminate\Http\Request;
 
 use Proflot\Http\Requests;
 use Proflot\Http\Controllers\Controller;
+use Proflot\Models\Sala;
+use Proflot\Repositories\SalaRepository;
 
 class SalaController extends Controller
 {
+    private $repository;
+
+      public function  __construct(SalaRepository $repository)
+    {
+        $this->repository = $repository;
+    
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -16,7 +26,8 @@ class SalaController extends Controller
      */
     public function index()
     {
-        //
+        $salas = Sala::all();
+        return view('admin.salas.index', compact('salas'));
     }
 
     /**
@@ -26,7 +37,7 @@ class SalaController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.salas.create');
     }
 
     /**
@@ -37,7 +48,11 @@ class SalaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        $sala = new Sala($data);
+        $sala->save();
+
+        return  redirect()->route('admin.salas.index');
     }
 
     /**
@@ -59,7 +74,9 @@ class SalaController extends Controller
      */
     public function edit($id)
     {
-        //
+        $sala = $this->repository->find($id);
+        return view('admin.salas.edit', 'sala');
+
     }
 
     /**
@@ -71,7 +88,16 @@ class SalaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->all();
+        $this->repository->update($data->id);
+        return  redirect()->route('admin.salas.index');
+
+        
+        $data = $Request->all();
+        $sala = Sala::find($data->id);
+        $sala->save();
+        return  redirect()->route('admin.salas.index');
+
     }
 
     /**
@@ -82,6 +108,8 @@ class SalaController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $sala = Sala::find($id);
+        $sala->delete();
+        return  redirect()->route('admin.salas.index');
     }
 }
