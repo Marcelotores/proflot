@@ -12,12 +12,11 @@
 */
 
 
-
 Route::group(['prefix'=>'admin', 'as'=>'admin.'], function(){
 
 	Route::get('', function () {
-    return view('menu');
-});
+		return view('menu');
+	});
 
 /*-----------------------------Disciplinas------------------------------------------------------------------*/
 Route::get('disciplinas/index',['as'=>'disciplinas.index', 'uses'=>'DisciplinaController@index']);
@@ -29,14 +28,14 @@ Route::get('disciplinas/destroy/{id}',['as'=>'disciplinas.destroy', 'uses'=>'Dis
 Route::get('disciplinas/show/{id}',['as'=>'disciplinas.show', 'uses'=>'DisciplinaController@show']);
 
 //Retorna as disciplinas por periodo
-Route::get('disciplinas/periodo/{id}',
-	['as'=>'disciplinas.periodo', 'uses'=>'DisciplinaController@getDisciplinasByPeriodo']);
+Route::get('disciplinas/periodo/{id}',['as'=>'disciplinas.periodo', 'uses'=>'DisciplinaController@getDisciplinasByPeriodo']);
 
 
 /*----------------------------Lotacao-------------------------------------------------------------------*/
 Route::get('turmas/index',['as'=>'turmas.index', 'uses'=>'TurmaController@index']);
 Route::get('turmas/novo',['as'=>'turmas.create', 'uses'=>'TurmaController@create']);
 Route::post('turmas/store',['as'=>'turmas.store', 'uses'=>'TurmaController@store']);
+Route::get('turmas/remove/{id}',['as'=>'turmas.destroy', 'uses'=>'TurmaController@destroy']);
 
 
 /*---------------------------------UserProfessor------------------------------------------------------------------*/
@@ -51,6 +50,18 @@ Route::get('users/show/{id}',['as'=>'users.show', 'uses'=>'UserController@show']
 
 
 Route::get('entrar',['as'=>'login.index', 'uses'=>'LoginController@index']);
+
+
+
+/*---------------------------------UserProfessor------------------------------------------------------------------*/
+
+Route::get('salas/index',['as'=>'salas.index', 'uses'=>'SalaController@index']);
+Route::get('salas/novo',['as'=>'salas.create', 'uses'=>'SalaController@create']);
+Route::post('salas/store',['as'=>'salas.store', 'uses'=>'SalaController@store']);
+Route::get('salas/editar/{id}',['as'=>'salas.edit', 'uses'=>'SalaController@edit']);
+Route::post('salas/update/{id}',['as'=>'salas.update', 'uses'=>'SalaController@update']);
+Route::get('salas/destroy/{id}',['as'=>'salas.destroy', 'uses'=>'SalaController@destroy']);
+Route::get('salas/show/{id}',['as'=>'salas.show', 'uses'=>'SalaController@show']);
 
 
 

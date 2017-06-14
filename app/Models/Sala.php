@@ -13,7 +13,7 @@ class Sala extends Model implements Transformable
      protected $fillable = [
     'campus',
     'capacity',
-    'mumber'];
+    'number'];
 
     public function turmas(){
          return $this->hasMany(Turma::class);

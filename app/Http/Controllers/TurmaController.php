@@ -57,22 +57,6 @@ class TurmaController extends Controller
     {
 
         $turmas = $this->repository->all();
-/*
-        $tur = $this->repository->find(8);
-
-        foreach ($tur->dias as $t) {
-            echo $t->id;
-            $di = $this->diaRepository->find($t->id);
-            foreach ($di->horarios as $horarios) {
-                echo $horarios->letra;
-            }
-            echo "<br>";
-
-        }
-
-  */     
-       // $dias = $this->diaRepository->getDias('dia', 'id');
-       // $horarios = $this->horarioRepository->getAllHorarios();
 
         return view('admin.turmas.index', compact('turmas'));
     }
@@ -172,6 +156,12 @@ class TurmaController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $turma = Turma::find($id);
+
+        $turma->dias()->detach();
+
+        $turma->delete();
+
+        return  redirect()->route('admin.turmas.index');
     }
 }

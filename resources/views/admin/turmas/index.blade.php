@@ -20,6 +20,7 @@
                            <th>Professor</th>  
                            <th>Dia</th>    
                            <th>Horários</th> 
+                           <th>Ações</th>
                          </tr>
                     </thead>
                     <tbody>   
@@ -44,6 +45,10 @@
                                           ?>
                                        @endforeach
                                      </td>
+                                      <td>
+                                        <a href="{{ route('admin.turmas.destroy',['id'=>$turma->id])}}">
+                                        <button type="button" class="btn btn-danger">Excluir Item</button></a>
+                                      </td>
                             </tr>
                                 @endforeach
                      </tbody>
