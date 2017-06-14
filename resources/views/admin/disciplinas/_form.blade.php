@@ -1,12 +1,12 @@
 
  <div class="forme-grup">
  	{!! Form::label('Periodo','Periodo:') !!}
- 	{!! Form::select('periodos_id',$periodos,null,['class'=>'form-control']) !!}
+ 	{!! Form::select('periodo_id',$periodos,null,['class'=>'form-control']) !!}
  </div>
 
   <div class="forme-grup">
  	{!! Form::label('Fluxo','Fluxo:') !!}
- 	{!! Form::select('fluxos_id',$fluxos,null,['class'=>'form-control']) !!}
+ 	{!! Form::select('fluxo_id',$fluxos,null,['class'=>'form-control']) !!}
  </div>
 
  <div class="forme-grup">

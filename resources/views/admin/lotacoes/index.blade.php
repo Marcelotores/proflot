@@ -7,7 +7,7 @@
          <div class="row">
            
               <div class="col-xs-12 col-md-8">
-                 <a href="" class="btn btn-default"><span class="glyphicon glyphicon-equalizer"></span>Periodo</a>
+                 <a href="{{route('admin.turmas.create')}}" class="btn btn-default"><span class="glyphicon glyphicon-equalizer"></span>+Lotação</a>
                  </br>
                  </br>
                  <table class="table table-bordered">

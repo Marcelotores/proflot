@@ -33,24 +33,7 @@
                 <a class="navbar-brand" href="#">[ PROFLOT ]</a>
             </div>
 
-            <div class="collapse navbar-collapse" id="navbar">
-                <ul class="nav navbar-nav">
-                
-                </ul>
-
-                <ul class="nav navbar-nav navbar-right">
-                    @if(auth()->guest())
-                       
-                    @else
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ auth()->user()->name }} <span class="caret"></span></a>
-                            <ul class="dropdown-menu" role="menu">
-                                <li><a href="/logout">Logout</a></li>
-                            </ul>
-                        </li>
-                    @endif
-                </ul>
-            </div>
+            
         </div>
     </nav>
 
@@ -66,10 +49,11 @@
                     <span class="icon-bar"></span>
                 </button>
 
-                <div class="navbar-header">
+                <div class="navbar">
                     <a class="navbar-brand" href="#"><span class="glyphicon glyphicon-education"></span>
                         System<b>Proflot</b>
                     </a>
+                    
 
 
                 </div>
@@ -85,16 +69,7 @@
                       </a>
                   </li>
                   <!-- Banner -->
-                  <li class="">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <span class="menu-icon pull-right hidden-xs showopacity glyphicon material-icons" style="font-size:36px">subject</span>Cadastro<span class="caret"></span>
-                    </a>
-                    <ul class="dropdown-menu forAnimate" role="menu">
-                        <li><a href="#"><i class="material-icons">add</i> Coordenador</a></li>
-                        <li><a href="#"><i class="material-icons">add</i> Professor</a></li>
-                        <li><a href="#"><i class="material-icons">add</i> Estagiario</a></li>
-                    </ul>
-                </li>
+                  
                 <li class="">
                     <a href="#">
                         <span class="menu-icon pull-right hidden-xs showopacity glyphicon material-icons" style="font-size:36px">recent_actors</span>Professor
@@ -102,7 +77,7 @@
 
                 </li>
                 <li class="">
-                    <a href="#">
+                    <a href="{{Route('admin.disciplinas.index')}}">
                         <span class="menu-icon pull-right hidden-xs showopacity glyphicon material-icons" style="font-size:36px">list</span>Disciplinas
                     </a>
 
@@ -119,7 +94,7 @@
 
             </li>
             <li class="">
-                <a href="#">
+                <a href="{{route('admin.turmas.index')}}">
                     <span class="menu-icon pull-right hidden-xs showopacity glyphicon material-icons" style="font-size:36px">dialpad</span>Lotação
                 </a>
 
@@ -128,6 +103,34 @@
                 <a href="#">
                     <span class="menu-icon pull-right hidden-xs showopacity glyphicon material-icons" style="font-size:36px">device_hub</span>Solicitação
                 </a>
+
+            </li>
+            <li class="separator">System</li>
+            <!-- Exit -->
+            <li class="">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <span class="menu-icon pull-right hidden-xs showopacity glyphicon material-icons" style="font-size:36px">subject</span>Usuario<span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu forAnimate" role="menu">
+                <li><a href="{{Route('admin.users.create')}}"><i class="material-icons">add</i>Usuario</a></li>
+                <li><a href="{{Route('admin.users.index')}}"><i class="material-icons">add</i> Todos</a></li>
+
+            </ul>
+        </li>
+
+        <li>
+            <li class="">
+
+                    
+                        <li class="">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> Bem Vindo {!! Auth::user()->name !!} <span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="/logout">Logout</a></li>
+                            </ul>
+                        </li>
+                 
+                </ul>
+                
 
             </li>
 

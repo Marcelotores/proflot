@@ -15,7 +15,8 @@ class Disciplina extends Model implements Transformable
     'name',
     'optativa',
     'pratica',
-    'carga_horaria'
+    'carga_horaria',
+    'curso_id'
     ];
 
       public function fluxo(){

@@ -76,6 +76,32 @@ Route::post('professores/update/{id}',['as'=>'professores.update', 'uses'=>'Prof
 Route::get('professores/destroy/{id}',['as'=>'professores.destroy', 'uses'=>'ProfessorController@destroy']);
 Route::get('professores/show/{id}',['as'=>'professores.show', 'uses'=>'ProfessorController@show']);
 
+/*-----------------------------Tipos------------------------------------------------------------------*/
+Route::get('tipos/index',['as'=>'tipos.index', 'uses'=>'TipoController@index']);
+Route::get('tipos/novo',['as'=>'tipos.create', 'uses'=>'TipoController@create']);
+Route::post('tipos/store',['as'=>'tipos.store', 'uses'=>'TipoController@store']);
+Route::get('tipos/editar/{id}',['as'=>'tipos.edit', 'uses'=>'TipoController@edit']);
+Route::post('tipos/update/{id}',['as'=>'tipos.update', 'uses'=>'TipoController@update']);
+
+
+/*-----------------------------Disciplinas------------------------------------------------------------------*/
+Route::get('disciplinas/index',['as'=>'disciplinas.index', 'uses'=>'DisciplinaController@index']);
+Route::get('disciplinas/novo',['as'=>'disciplinas.create', 'uses'=>'DisciplinaController@create']);
+Route::post('disciplina/store',['as'=>'disciplinas.store', 'uses'=>'DisciplinaController@store']);
+Route::get('disciplinas/editar/{id}',['as'=>'disciplinas.edit', 'uses'=>'DisciplinaController@edit']);
+Route::post('disciplinas/update/{id}',['as'=>'disciplinas.update', 'uses'=>'DisciplinaController@update']);
+Route::get('disciplinas/status/{id}',['as'=>'disciplinas.status', 'uses'=>'DisciplinaController@status']);
+Route::get('disciplinas/show/{id}',['as'=>'disciplinas.show', 'uses'=>'DisciplinaController@show']);
+
+
+/*----------------------------Cursos-------------------------------------------------------------------*/
+Route::get('cursos/index',['as'=>'cursos.index', 'uses'=>'CursoController@index']);
+Route::get('cursos/novo',['as'=>'cursos.create', 'uses'=>'CursoController@create']);
+Route::post('cursos/store',['as'=>'cursos.store', 'uses'=>'CursoController@store']);
+Route::get('cursos/editar/{id}',['as'=>'cursos.edit', 'uses'=>'CursoController@edit']);
+Route::post('cursos/update/{id}',['as'=>'cursos.update', 'uses'=>'CursoController@update']);
+
+
 
 });
 

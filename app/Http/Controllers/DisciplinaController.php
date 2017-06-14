@@ -3,10 +3,13 @@
 namespace Proflot\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use Proflot\Models\Disciplina;
+use Auth;
 use Proflot\Http\Requests;
 use Proflot\Http\Controllers\Controller;
 use Proflot\Repositories\DisciplinaRepository;
+use Proflot\Repositories\PeriodoRepository;
+use Proflot\Repositories\FluxoRepository;
 use Illuminate\Support\Facades\DB;
 
 class DisciplinaController extends Controller
@@ -14,9 +17,13 @@ class DisciplinaController extends Controller
 
 
     private $repository;
+    private $fluxoRepository;
+    private $periodoRepository;
 
-    public function __construct(DisciplinaRepository $repository) {
+    public function __construct(DisciplinaRepository $repository,PeriodoRepository $periodoRepository, FluxoRepository $fluxoRepository ) {
         $this->repository = $repository;
+        $this->periodoRepository = $periodoRepository;
+        $this->fluxoRepository =$fluxoRepository;
     }
 
     /**
@@ -26,7 +33,9 @@ class DisciplinaController extends Controller
      */
     public function index()
     {
-        //
+        $disciplinas = $this->repository->paginate(5);
+        return view('admin.disciplinas.index',compact('disciplinas'));
+
     }
 
     public function getDisciplinasByPeriodo($periodo) {
@@ -42,7 +51,9 @@ class DisciplinaController extends Controller
      */
     public function create()
     {
-        //
+       $periodos = $this->periodoRepository->lists('description', 'id');
+       $fluxos = $this->fluxoRepository->lists('description', 'id');
+        return view('admin.disciplinas.create',compact('periodos','fluxos'));
     }
 
     /**
@@ -53,7 +64,18 @@ class DisciplinaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $curso_id = Auth::user()->curso_id;
+
+        Disciplina::create([
+            'periodo_id' => $request['periodo_id'],
+            'fluxo_id' => $request['fluxo_id'],
+            'name' => bcrypt($request['name']),
+            'optativa' => $request['optativa'],
+            'pratica' => $request['pratica'],
+           'carga_horaria'=>$request['carga_horaria'],
+           'curso_id'=> $curso_id,
+        ]);
+        return redirect()->route('admin.disciplinas.index');
     }
 
     /**
@@ -96,8 +118,17 @@ class DisciplinaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function status($id)
     {
-        //
+         $status = $this->repository->find($id)->active;
+          if($status == 0)
+          {
+            $this->repository->update(['active'=>1],$id);
+            return redirect()->route('admin.disciplinas.index');
+          }else if($status == 1)
+          {
+            $this->repository->update(['active'=>0],$id);
+            return redirect()->route('admin.disciplinas.index');
+          }
     }
 }
