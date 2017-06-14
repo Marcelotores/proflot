@@ -50,13 +50,39 @@
 
  <hr>
 
+   {!! Form::label('Horario','Horários:') !!}
+    <br>
+
+    <div class="row">
+    @foreach($dias as $dia)
+   
+             <div class="col-sm-2">  
+                 {{$dia->dia}}
+                   <br>
+                 @foreach($horarios as $horario)
+          
+                    <input type="checkbox" name="letra[{{$dia->id}}][]" value="{{$horario->id}}" />
+                    {{$horario->letra}} - {{$horario->start_time}} às {{$horario->end_time}}
+                    <br>
+                  
+                  @endforeach 
+            </div>
+     
+           
+    @endforeach    
+</div>
+
+     <div class="forme-grup">
+      {!! Form::submit('Salvar',['class'=>'btn btn-primary']) !!}
+    </div>
+
 
 
   <!-- Segunda seção -->
 
 
 
-
+<!--
 
 
 <a href="#janela1" rel="modal">Setar horários</a>
@@ -64,30 +90,39 @@
 <div class="window" id="janela1">
     <a href="#" class="fechar">X Fechar</a>
 
-    <h4>Escolha os dias e horários</h4>
-    <div class="forme-grup">
-      {!! Form::label('Dia','Dia:') !!}
-      {!! Form::select('dia', $dias, null,['class'=>'form-control', 'placeholder' => 'Escolha o Dia']) !!}
-    </div>
-
-    <br>
-
     {!! Form::label('Horario','Horários:') !!}
     <br>
-    @foreach($horarios as $horario)
-    <div class="forme-grup">
-      <input type="checkbox" name="letra[]" value="{{$horario->id}}" />
-      {{$horario->letra}} - {{$horario->start_time}} às {{$horario->end_time}}<br /> 
-    </div>
-    @endforeach
-<br>
-    <div class="forme-grup">
-      {!! Form::submit('Salvar',['class'=>'btn btn-primary']) !!}
-    </div> 
-                  
+
+    <div class="row">
+    @foreach($dias as $dia)
+   
+                
+            {{$dia->dia}}
+              <br>
+          
+            <div class="col-sm-2">     
+             @foreach($horarios as $horario)
+      
+                <input type="checkbox" name="letra[{{$dia->id}}][]" value="{{$horario->id}}" />
+                {{$horario->letra}} - {{$horario->start_time}} às {{$horario->end_time}}
+                <br>
+              
+              @endforeach 
+            </div>
+          
+          
     
 
+      
+        
+    @endforeach    
+    </div>
 
+
+
+     <div class="forme-grup">
+      {!! Form::submit('Salvar',['class'=>'btn btn-primary']) !!}
+    </div>
 </div>
 
 <div id="mascara"></div>
@@ -95,7 +130,7 @@
 
 
 <br>
-
+-->
 
  
  

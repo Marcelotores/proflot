@@ -37,4 +37,9 @@ class DiaRepositoryEloquent extends BaseRepository implements DiaRepository
     public function getDias ($value, $key = null) {
         return $this->model->lists('dia', 'id');
     }
+
+    public function getDiasByCurso()
+    {
+        return $this->model->all();
+    }
 }
