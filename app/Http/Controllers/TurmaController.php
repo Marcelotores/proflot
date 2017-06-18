@@ -23,6 +23,7 @@ use Proflot\Models\ItemLotacao;
 use Proflot\Models\Sala;
 use Proflot\Models\Turma;
 use Proflot\Models\DiaHorarioTurma;
+use Proflot\Models\Dia;
 
 
 class TurmaController extends Controller
@@ -57,6 +58,9 @@ class TurmaController extends Controller
     {
 
         $turmas = $this->repository->all();
+       // $info = DB::select('select d.dia, h.letra as horario, t.description as turma from dias d, horarios h, turmas t, dia_horario_turmas dht where d.id = dht.dia_id and h.id = dht.horario_id and t.id = dht.turma_id');
+
+ 
 
         return view('admin.turmas.index', compact('turmas'));
     }
@@ -72,7 +76,7 @@ class TurmaController extends Controller
         $disciplinas = $this->disciplinaRepository->getDisciplinasByCurso();
         $users = $this->userRepository->getUsersByCurso('name', 'id');
         $salas = $this->salaRepository->getSalasByCurso('number', 'id');
-        $dias = $this->diaRepository->getDias('dia', 'id');
+        $dias = $this->diaRepository->getDiasByCurso();
         //$horarios = $this->horarioRepository->getHorarios('id', 'letra');
         $horarios = $this->horarioRepository->getAllHorarios();
 
@@ -89,6 +93,42 @@ class TurmaController extends Controller
     {
         $data = $request->except('periodo_id');
 
+
+        $info = $request->input('letra');
+/*
+$dias = array_keys($dados);
+
+foreach ($dias as $dia) {
+    echo "$dia";
+    echo "<br>";
+        foreach ($dados[$dia] as $hora) {
+            echo $hora;
+        }
+        echo "<br>";
+}*/
+
+/*
+        foreach ($array_keys as $key) {
+            echo $key;
+            echo "<br>";
+        }
+*/
+/*
+        foreach($dados as $dado) {
+            echo $dado
+            if(is_array($dado)) {
+                foreach($dado as $d){
+                   echo $d;
+                }
+            }
+            else {
+              echo $dado. '<br/>';
+            }
+        }
+*/
+
+
+
         $periodo = $request->input('periodo_id');
 
 
@@ -102,7 +142,7 @@ class TurmaController extends Controller
         $turma->save();
 
 
-        $teste = $this->repository->dia_turma_horario($dia, $horarios, $turma->id, $sala);
+        $teste = $this->repository->dia_turma_horario($info, $turma->id, $sala);
 
 
 

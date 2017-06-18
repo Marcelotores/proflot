@@ -72,7 +72,7 @@
                     </a>
 
                 </li><li class="">
-                <a href="#">
+                <a href="{{Route('admin.salas.index')}}">
                     <span class="menu-icon pull-right hidden-xs showopacity glyphicon material-icons" style="font-size:36px">view_quilt</span>Salas
                 </a>
 

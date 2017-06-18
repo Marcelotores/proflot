@@ -18,8 +18,7 @@
                            <th>Disciplina</th>  
                            <th>Sala</th>  
                            <th>Professor</th>  
-                           <th>Dia</th>    
-                           <th>Horários</th> 
+                           <th>Informações</th>    
                            <th>Ações</th>
                          </tr>
                     </thead>
@@ -33,16 +32,20 @@
                                      <td>{{$turma->user->name}}</td>
                                      <td>
                                        @foreach($turma->dias as $dia)
-                                          {{$dia->dia}}
-                                              <td>
-                                                @foreach($turma->horarios as $horario)
-                                                    {{$horario->letra}}
-                                                @endforeach
-                                              </td>
+                                        <?php 
 
-                                          <?php 
-                                            break 
-                                          ?>
+                                          if(isset($flag)) {
+                                            if ($dia->id == $flag) {
+                                              continue;
+                                            }
+                                          }
+                                        $flag = $dia->id;
+
+                                        ?>
+                                         Dia: {{$dia->dia}} -
+                                         Hora:
+                             
+                                        <br>
                                        @endforeach
                                      </td>
                                       <td>
