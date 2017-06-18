@@ -1,3 +1,62 @@
+/*------home -------*/
+.navbar-m1p {
+    background-color: rgba(0, 0, 0, 0);
+    border-color: #43658e;
+}
+.navbar-m1p span, .navbar-m1p a {
+    color: #43658e;
+}
+.navi li > a:hover, .navi .open > a:hover, .navi li > a:focus, .navi .open > a:focus, .navi li > a:active, .navi .open > a:active {
+    background-color:#e4e1e1;
+}
+
+.navi > li > a:hover, .navi > li > a:focus {
+    text-decoration: none;
+    background-color: #eee;
+}
+
+.navi li > a:hover, .navi .open > a:hover, .navi li > a:focus, .navi .open > a:focus, .navi li > a:active, .navi .open > a:active {
+    background-color: #e4e1e1;
+}
+@media (min-width: 768px) 
+.navibar-navi > li > a {
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+.navibar-nav > li > a {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    line-height: 20px;
+}
+
+.navi > li > a {
+    position: relative;
+    display: block;
+    padding: 10px 15px;
+}
+
+.navibar-nav {
+    float: left;
+    margin: 0;
+}
+
+.navibar-nav {
+    margin: 7.5px -15px;
+}
+
+.navi {
+    padding-left: 0;
+    margin-bottom: 0;
+    list-style: none;
+}
+
+
+
+
+
+
+/*---------------*/
  body,html{
     height: 100%;
 }

@@ -5,6 +5,7 @@ namespace Proflot\Http\Controllers;
 use Illuminate\Http\Request;
 use Auth;
 use Proflot\Models\Solicitar;
+use Proflot\Models\Curso;
 use Proflot\Http\Requests;
 use Proflot\Http\Controllers\Controller;
 use Proflot\Repositories\UserRepository;
@@ -43,8 +44,8 @@ class CoordenadorController extends Controller
         $remetente = Auth::user()->curso_id;
         $remetente = $this->cursoRepository->find($remetente)->description;
         $users = $this->repository->lists('name','id');
-        $disciplinas = $this->disciplinaRepository->lists('name', 'id');
-        $cursos = $this->cursoRepository->not_curso_coord ();
+        $disciplinas = $this->disciplinaRepository->not_disci_coord();
+        $cursos = $this->cursoRepository->not_curso_coord();
         $fluxos = $this->fluxoRepository->lists('description', 'id');
         return view('admin.coordenadores.solicitar',compact('remetente','cursos','fluxos','disciplinas','users','horarios'));
         
@@ -52,22 +53,44 @@ class CoordenadorController extends Controller
     
      public function storeSolicita(Request $request)
     {   
-        
-         $re = $request->all();
-         $this->solicitarRepository->create($re);
-          /*Solicitar::create([
-            'cursos_id' => $request['cursos_id'],
-            'fluxos_id' => $request['fluxos_id'],
-            'disciplinas_id' => $request['disciplinas_id'],
-            'users_id' => $request['users_id'],
-            'obs'=>$request['obs'],
-            'curso_remetente_id'=> $request['curso_remetente_id']
-        ]);
-        
-         //return $curso_remetente_id;
-         //$this->solicitarRepository->create(['curso_remetente_id'=>$curso_remetente_id]);
 
-        */return redirect()->route('admin.coordenadores.solicita.mostra');       
+       
+       
+         $curso_remetente_id = Auth::user()->curso_id;
+         $remetente = $this->cursoRepository->find($curso_remetente_id)->description;
+    
+         Solicitar::create([
+            'curso_id' => $request['curso_id'],
+            'fluxo_id' => $request['fluxo_id'],
+            'disciplina_id' => $request['disciplina_id'],
+            'user_id' => $request['user_id'],
+            'obs'=>$request['obs'],
+            'curso_remetente_id'=> $curso_remetente_id,
+            'remetente'=>$remetente,
+        ]);
+           
+        return redirect()->route('admin.coordenadores.solicita.mostra');       
+    }
+
+     public function resposta(Request $request, $id)
+    {       
+             $status = $request['status'];
+             $resposta = $request['resposta'];
+             $this->solicitarRepository->update(['status'=>$status],$id);
+             $this->solicitarRepository->update(['resposta'=> $resposta],$id);
+            return redirect()->route('admin.coordenadores.solicita.mostra');    
+          
+    }
+
+    public function ocultar($id)
+    {       
+          $ocultar = $this->solicitarRepository->find($id)->ocultar;
+          if($ocultar == 0)
+          {
+             $this->solicitarRepository->update(['ocultar'=>1],$id);
+            return redirect()->route('admin.coordenadores.solicita.mostra');
+          }
+             
     }
 
     /**
@@ -111,37 +134,10 @@ class CoordenadorController extends Controller
     }
     public function mostra()
     {
-       
-        //$solicitars = $this->solicitarRepository->all();
 
-        $solicitars = Solicitar::all();
-
-        foreach ($solicitars as $solicitar) {
-            echo $solicitar->curso->description;
-        }
-       
-        // return $solicitars = $this->repository->user();
-/*
-       foreach ($solicitars as $s) {
-            $user_id = $s->users_id;
-            $cursos_id = $s->cursos_id;
-            $disciplina_id = $s->disciplinas_id;
-            $fluxo_id = $s->fluxos_id;
-            $curso_remetente_id = $s->curso_remetente_id;
-             $professorSolicitado[] = $this->repository->find($user_id); 
-         $cursoSolicitado[] = $this->cursoRepository->find($cursos_id);
-         $disciplinaSolicitado[] = $this->disciplinaRepository->find($disciplina_id);
-         $fluxoSolicitado[] = $this->fluxoRepository->find($cursos_id);
-          $cursoRemetente[] = $this->cursoRepository->find($curso_remetente_id); 
-       
-    
-           
-        }
-        */
-
-
-            //return view('admin.coordenadores.allSolicita',compact('cursoRemetente','fluxoSolicitado','disciplinaSolicitado','cursoSolicitado','solicitars','professorSolicitado'));
-       // return view('admin.coordenadores.allSolicita',compact('solicitars'));
+        $solicitars = $this->solicitarRepository->all();
+      
+        return view('admin.coordenadores.allSolicita',compact('solicitars'));
         
     }
 

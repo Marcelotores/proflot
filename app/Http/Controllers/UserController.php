@@ -10,6 +10,7 @@ use Proflot\Repositories\TipoRepository;
 use Proflot\Repositories\UserRepository;
 use Proflot\Repositories\CursoRepository;
 use Auth;
+use Illuminate\Support\Facades\Log;
 class UserController extends Controller
 {
   
@@ -23,6 +24,7 @@ class UserController extends Controller
          $this->cursoRepository = $cursoRepository;
         
     }
+   
     /**
      * Display a listing of the resource.
      *

@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddRemetentesToSolicitarsTable extends Migration
+class AddOcultarToSolicitarsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class AddRemetentesToSolicitarsTable extends Migration
     public function up()
     {
         Schema::table('solicitars', function (Blueprint $table) {
-            $table->integer('curso_remetente_id')->unsigned();
+            $table->boolean('ocultar')->default(false);
         });
     }
 

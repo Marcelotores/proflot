@@ -10,7 +10,8 @@
         "laravel/framework": "5.1.*",
         "prettus/l5-repository": "^2.6",
         "laravelcollective/html": "5.1.*",
-        "Bestmomo/Scafold": "dev-master"
+        "Bestmomo/Scafold": "dev-master",
+        "league/flysystem-dropbox": "^1.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

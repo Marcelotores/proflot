@@ -8,7 +8,7 @@ use Proflot\Repositories\DisciplinaRepository;
 use Proflot\Models\Disciplina;
 use Proflot\Validators\DisciplinaValidator;
 use Illuminate\Support\Facades\DB;
-
+use Auth;
 /**
  * Class DisciplinaRepositoryEloquent
  * @package namespace Proflot\Repositories;
@@ -46,6 +46,13 @@ class DisciplinaRepositoryEloquent extends BaseRepository implements DisciplinaR
 
     public function lists($value, $key = null){
         return $this->model->lists('name', 'id');
+    }
+
+    public function not_disci_coord () {
+        $disciplinas = DB::table('disciplinas')
+        ->where('id', '<>',Auth::user()->curso_id)
+        ->lists('name', 'id');
+        return $disciplinas;
     }
 
 }

@@ -4,15 +4,15 @@ namespace Proflot\Repositories;
 
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
-use Proflot\Repositories\FluxoRepository;
-use Proflot\Models\Fluxo;
-use Proflot\Validators\FluxoValidator;
+use Proflot\Repositories\LoogRepositoryRepository;
+use Proflot\Models\LoogRepository;
+use Proflot\Validators\LoogRepositoryValidator;
 
 /**
- * Class FluxoRepositoryEloquent
+ * Class LoogRepositoryRepositoryEloquent
  * @package namespace Proflot\Repositories;
  */
-class FluxoRepositoryEloquent extends BaseRepository implements FluxoRepository
+class LoogRepositoryRepositoryEloquent extends BaseRepository implements LoogRepositoryRepository
 {
     /**
      * Specify Model class name
@@ -21,7 +21,7 @@ class FluxoRepositoryEloquent extends BaseRepository implements FluxoRepository
      */
     public function model()
     {
-        return Fluxo::class;
+        return LoogRepository::class;
     }
 
     
@@ -33,8 +33,4 @@ class FluxoRepositoryEloquent extends BaseRepository implements FluxoRepository
     {
         $this->pushCriteria(app(RequestCriteria::class));
     }
-     public function lists($value, $key = null){
-        return $this->model->lists('description', 'id');
-    }
-
 }

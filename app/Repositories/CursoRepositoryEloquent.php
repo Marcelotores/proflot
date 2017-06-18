@@ -7,7 +7,8 @@ use Prettus\Repository\Criteria\RequestCriteria;
 use Proflot\Repositories\CursoRepository;
 use Proflot\Models\Curso;
 use Proflot\Validators\CursoValidator;
-
+use Illuminate\Support\Facades\DB;
+use Auth;
 /**
  * Class CursoRepositoryEloquent
  * @package namespace Proflot\Repositories;
