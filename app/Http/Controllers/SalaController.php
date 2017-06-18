@@ -75,7 +75,7 @@ class SalaController extends Controller
     public function edit($id)
     {
         $sala = $this->repository->find($id);
-        return view('admin.salas.edit', 'sala');
+        return view('admin.salas.edit', compact('sala'));
 
     }
 
@@ -89,14 +89,9 @@ class SalaController extends Controller
     public function update(Request $request, $id)
     {
         $data = $request->all();
-        $this->repository->update($data->id);
+        $this->repository->update($data, $id);
         return  redirect()->route('admin.salas.index');
 
-        
-        $data = $Request->all();
-        $sala = Sala::find($data->id);
-        $sala->save();
-        return  redirect()->route('admin.salas.index');
 
     }
 

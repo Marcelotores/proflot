@@ -8,6 +8,7 @@
            
               <div class="col-xs-12 col-md-8">
                  <a href="" class="btn btn-default"><span class="glyphicon glyphicon-equalizer"></span>Periodo</a>
+                 
                  </br>
                  </br>
                  <table class="table table-bordered">
@@ -30,13 +31,13 @@
                                <td>{{$sala->capacity}}</td>
                                <td>{{$sala->number}}</td>
                               
-                               <td><a href="#"><button type="button" class="btn btn-primary">Editar</button></a></td>
+                               <td><a href="{{ route('admin.salas.update',['id'=>$sala->id])}}"><button type="button" class="btn btn-primary">Editar</button></a></td>
                                <td><a href="{{ route('admin.salas.destroy',['id'=>$sala->id])}}"><button type="button" class="btn btn-danger">Desabilitar</button></td>
                             </tr>
                                 @endforeach
                      </tbody>
                   </table>
-                   
+                  
                 </div>
 
         </div>

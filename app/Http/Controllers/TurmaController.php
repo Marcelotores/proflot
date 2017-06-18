@@ -150,6 +150,10 @@ foreach ($dias as $dia) {
            return  redirect()->route('admin.turmas.index');
         }else {
             echo $teste;
+
+            $turma->dias()->detach();
+
+            $turma->delete();
         }
 
     }

@@ -1,3 +1,4 @@
+
  <div class="forme-grup">
  	{!! Form::label('Campus','Campus:') !!}
  	{!! Form::text('campus',null,['class'=>'form-control']) !!}
