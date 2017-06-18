@@ -1,5 +1,4 @@
-    <?php
-
+<?php 
 namespace Proflot\Repositories;
 
 use Prettus\Repository\Eloquent\BaseRepository;

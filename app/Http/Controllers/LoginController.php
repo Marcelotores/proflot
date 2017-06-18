@@ -43,7 +43,7 @@ class LoginController extends Controller
         return redirect()->route('admin.');
 
        } 
-       return redirect('admin/entrar');
+       return redirect('admin/entrar')->with('error_message', 'Invalid data')->withInput();
     }
     public function logout()
     {

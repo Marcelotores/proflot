@@ -52,7 +52,7 @@ class DisciplinaController extends Controller
     public function create()
     {
        $periodos = $this->periodoRepository->lists('description', 'id');
-       $fluxos = $this->fluxoRepository->lists('description', 'id');
+     
         return view('admin.disciplinas.create',compact('periodos','fluxos'));
     }
 
@@ -68,13 +68,14 @@ class DisciplinaController extends Controller
 
         Disciplina::create([
             'periodo_id' => $request['periodo_id'],
-            'fluxo_id' => $request['fluxo_id'],
-            'name' => bcrypt($request['name']),
+            'name' => $request['name'],
             'optativa' => $request['optativa'],
             'pratica' => $request['pratica'],
            'carga_horaria'=>$request['carga_horaria'],
            'curso_id'=> $curso_id,
         ]);
+    
+         
         return redirect()->route('admin.disciplinas.index');
     }
 
@@ -86,8 +87,14 @@ class DisciplinaController extends Controller
      */
     public function show($id)
     {
-        //
+    
+        $disciplina = $this->repository->find($id);
+
+        return view('admin.disciplinas.show',compact('disciplina'));  
     }
+
+
+
 
     /**
      * Show the form for editing the specified resource.
@@ -97,7 +104,10 @@ class DisciplinaController extends Controller
      */
     public function edit($id)
     {
-        //
+        $disciplina = $this->repository->find($id);
+        $periodos = $this->periodoRepository->lists('description',$id);
+       
+        return view('admin.disciplinas.edit',compact('disciplina','periodos'));
     }
 
     /**
@@ -109,7 +119,10 @@ class DisciplinaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->all();
+  
+        $this->repository->update($data,$id);
+        return redirect()->route('admin.disciplinas.index');
     }
 
     /**
@@ -121,13 +134,16 @@ class DisciplinaController extends Controller
     public function status($id)
     {
          $status = $this->repository->find($id)->active;
+          
           if($status == 0)
           {
-            $this->repository->update(['active'=>1],$id);
+            
+            $this->repository->update(['active'=> 1],$id);
             return redirect()->route('admin.disciplinas.index');
           }else if($status == 1)
           {
-            $this->repository->update(['active'=>0],$id);
+           
+            $this->repository->update(['active'=> 0], $id);
             return redirect()->route('admin.disciplinas.index');
           }
     }

@@ -11,13 +11,16 @@ class Solicitar extends Model implements Transformable
 	use TransformableTrait;
 
 	protected $fillable = [
-	'cursos_id',
-	'fluxos_id',
-	'disciplinas_id',
-	'users_id',
-	'status',
+	'curso_id',
+	'fluxo_id',
+	'disciplina_id',
+	'user_id',
 	'obs',
+	'status',
 	'curso_remetente_id',
+	'remetente',
+	'resposta',
+	'ocultar'
 
 
 	];
@@ -30,5 +33,8 @@ class Solicitar extends Model implements Transformable
 	}
 	public function curso(){
 		return $this->belongsTo(Curso::class);
+	}
+	public function fluxo(){
+		return $this->belongsTo(Fluxo::class);
 	}
 }

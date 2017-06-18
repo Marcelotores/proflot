@@ -10,14 +10,40 @@
 | and give it the controller to call when that URI is requested.
 |
 */
+use Monolog\Logger;
+use Monolog\Handler\StreamHandler;
+DB::listen(function($sql, $bindings, $time) {
+	if (App::environment()=="local"){
+		$xsql = explode("?", $sql);
+		$nsql = "";
+		$br = "</br>";
+		$h4a = "<h5>";
+		$h4f= "</h5>";
+		$tr = "<li>";
+		$trf ="</li>";
+
+		for ($i=0; $i < count($xsql)-1; $i++) {
+		   $nsql .= $xsql[$i] . $bindings[$i];
+		}
+		$view_log = new Logger($tr ."SQL");
+		$view_log->pushHandler(
+			new StreamHandler('./../resources/views/sql.blade.php')
+			);
+		$view_log->addInfo($h4a . $nsql.$h4f?:$h4a.$sql.$h4f.$trf.$br);
+	}
+});
+
 
 
 Route::group(['prefix'=>'admin', 'as'=>'admin.'], function(){
-
-	Route::get('', function () {
+/*-----------------------------------logs-------------------------------------------------------------------*/
+Route::get('logs', function () {
+	return view('sql');
+});
+/*---------------------------------------admin-----------------------------------------------------------------*/
+Route::get('', function () {
 		return view('menu');
-	});
-
+});
 /*-----------------------------Disciplinas------------------------------------------------------------------*/
 Route::get('disciplinas/index',['as'=>'disciplinas.index', 'uses'=>'DisciplinaController@index']);
 Route::get('disciplinas/novo',['as'=>'disciplinas.create', 'uses'=>'DisciplinaController@create']);
@@ -47,6 +73,8 @@ Route::get('users/editar/{id}',['as'=>'users.edit', 'uses'=>'UserController@edit
 Route::post('users/update/{id}',['as'=>'users.update', 'uses'=>'UserController@update']);
 Route::get('users/statu/{id}',['as'=>'users.status', 'uses'=>'UserController@status']);
 Route::get('users/show/{id}',['as'=>'users.show', 'uses'=>'UserController@show']);
+Route::get('users/showProfile/{id}',['as'=>'users.showProfile', 'uses'=>'UserController@showProfile']);
+
 
 
 Route::get('entrar',['as'=>'login.index', 'uses'=>'LoginController@index']);
@@ -77,6 +105,8 @@ Route::get('coordenadores/solicitar',['as'=>'coordenadores.solicitar', 'uses'=>'
 Route::post('coordenadores/storesolicita',['as'=>'coordenadores.storesolicita', 'uses'=>'CoordenadorController@storesolicita']);
 Route::get('coordenadores/solicita/mostra',['as'=>'coordenadores.solicita.mostra', 'uses'=>'CoordenadorController@mostra']);
 Route::get('coordenadores/visualizar/solicita/{id}',['as'=>'coordenadores.visualizar.solicita', 'uses'=>'CoordenadorController@visualiza']);
+Route::get('coordenadores/resolvido/{id}',['as'=>'coordenadores.ocultar', 'uses'=>'CoordenadorController@ocultar']);
+Route::post('coordenadores/resposta/{id}',['as'=>'cordenadores.resposta', 'uses'=>'CoordenadorController@resposta']);
 
 /*-----------------------------Professores----------------------------------------------------------*/
 Route::get('professores/index',['as'=>'professores.index', 'uses'=>'ProfessorController@index']);
