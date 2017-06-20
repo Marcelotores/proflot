@@ -17,6 +17,7 @@ class CursoController extends Controller
     public function  __construct(CursoRepository $repository)
     {
         $this->repository = $repository;
+        $this->middleware('auth');
 
     }
     /**

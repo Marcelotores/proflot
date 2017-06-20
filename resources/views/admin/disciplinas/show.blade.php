@@ -15,16 +15,16 @@
             <li class="list-group-item"><b>Período: </b>{{ $disciplina->periodo->description}}</li>
           </b>
           @if($disciplina->optativa == 0)
-          <li class="list-group-item"><b>Optativa: Não{{$disciplina->optativa}} </li>
+          <li class="list-group-item"><b>Optativa: Não</li>
           @endif
           @if($disciplina->optativa == 1)
-          <li class="list-group-item"><b>Optativa: Sim{{$disciplina->optativa}} </li>
+          <li class="list-group-item"><b>Optativa: Sim </li>
           @endif
-          @if($disciplina->pratica = 0)   
-          <li class="list-group-item"><b>Prática: </b>Não{{$disciplina->pratica}}</li>
+          @if($disciplina->pratica == 0)   
+          <li class="list-group-item"><b>Prática: </b>Não</li>
           @endif
-          @if($disciplina->pratica = 1)  
-          <li class="list-group-item"><b>Prática: </b>Sim{{$disciplina->pratica}}</li>
+          @if($disciplina->pratica == 1)  
+          <li class="list-group-item"><b>Prática: </b>Sim</li>
           @endif
           <li class="list-group-item"><b>Carga Horaria: </b>{{ $disciplina->carga_horaria}}</li>
 

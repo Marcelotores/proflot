@@ -12,4 +12,9 @@ class Tipo extends Model implements Transformable
 
     protected $fillable = ['description'];
 
+    public function user(){
+         return $this->hasMany(user::class);
+          
+    }
+
 }

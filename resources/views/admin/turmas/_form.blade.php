@@ -47,34 +47,49 @@
   {!! Form::label('Turma','Turma:') !!}
   {!! Form::text('description',null,['class'=>'form-control', 'placeholder' => 'A, B...']) !!}
  </div>
+  <br>
+  <br>
 
- <hr>
+<div class="container">
+  <div class="row">
+    <div class="col-md-7">
+      <div class="panel panel-default col-md-19 ">
+        <div class="panel-heading" style="color:#527a9d">Horarios</div>
+        <div class="panel-body">
+          @foreach($dias as $dia)
 
-   {!! Form::label('Horario','Horários:') !!}
-    <br>
+          <div class="col-sm-5">  
+           {{$dia->dia}}
+           <br>
+           @foreach($horarios as $horario)
 
-    <div class="row">
-    @foreach($dias as $dia)
-   
-             <div class="col-sm-2">  
-                 {{$dia->dia}}
-                   <br>
-                 @foreach($horarios as $horario)
-          
-                    <input type="checkbox" name="letra[{{$dia->id}}][]" value="{{$horario->id}}" />
-                    {{$horario->letra}} - {{$horario->start_time}} às {{$horario->end_time}}
-                    <br>
-                  
-                  @endforeach 
-            </div>
-     
-           
-    @endforeach    
+           <input type="checkbox" name="letra[{{$dia->id}}][]" value="{{$horario->id}}" />
+           {{$horario->letra}} - {{$horario->start_time}} às {{$horario->end_time}}
+           <br>
+
+           @endforeach 
+         </div>
+
+
+         @endforeach 
+         <br>
+        
+       </div>
+
+      
+</div>  
+ <div class="forme-grup">
+        {!! Form::submit('Salvar',['class'=>'btn btn-primary']) !!}
+      </div>  
+</div>  
+</div>  
 </div>
-
-     <div class="forme-grup">
-      {!! Form::submit('Salvar',['class'=>'btn btn-primary']) !!}
-    </div>
+</div> 
+</div>  
+</div>  
+</div>  
+</div>
+</div> 
 
 
 

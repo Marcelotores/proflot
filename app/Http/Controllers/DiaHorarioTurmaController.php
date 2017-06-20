@@ -15,7 +15,7 @@ class DiaHorarioTurmaController extends Controller
     public function  __construct(DiaHorarioTurmaRepository $repository)
     {
         $this->repository = $repository;
-
+        $this->middleware('auth');
     }
 
     /**

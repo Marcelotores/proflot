@@ -48,6 +48,7 @@ class TurmaController extends Controller
         $this->diaRepository = $diaRepository; 
         $this->horarioRepository = $horarioRepository; 
         $this->infoRepository = $infoRepository; 
+        $this->middleware('auth');
     }
    /**
      * Display a listing of the resource.
@@ -154,6 +155,7 @@ foreach ($dias as $dia) {
             $turma->dias()->detach();
 
             $turma->delete();
+            return view('errors.err')
         }
 
     }

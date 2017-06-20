@@ -16,9 +16,11 @@ use Proflot\Repositories\HorarioRepository;
 use Proflot\Http\Requests\AdminProfessorRequest;
 use Proflot\Repositories\SolicitarRepository;
 use Proflot\Models\User;
+use Illuminate\Support\Facades\DB;
 class CoordenadorController extends Controller
 {
 
+    
 
     private $repository;
     private $disciplinaRepository;
@@ -30,6 +32,7 @@ class CoordenadorController extends Controller
     public function __construct(UserRepository $repository, DisciplinaRepository $disciplinaRepository, CursoRepository $cursoRepository,
      FluxoRepository $fluxoRepository, HorarioRepository $horarioRepository,SolicitarRepository $solicitarRepository)
     {
+        
 
      $this->repository = $repository;
      $this->disciplinaRepository =$disciplinaRepository;
@@ -37,8 +40,14 @@ class CoordenadorController extends Controller
      $this->fluxoRepository =$fluxoRepository;
      $this->horarioRepository= $horarioRepository;
       $this->solicitarRepository= $solicitarRepository;
+       $this->middleware('auth');
     }
 
+     public function relatorio(){
+
+        return view('admin.coordenadores.relatorio');
+
+     }
     public function solicita()
     {  
         $remetente = Auth::user()->curso_id;
@@ -50,7 +59,13 @@ class CoordenadorController extends Controller
         return view('admin.coordenadores.solicitar',compact('remetente','cursos','fluxos','disciplinas','users','horarios'));
         
     }
-    
+     public function mostraOculta() {
+       
+            $solicitars = DB::table('solicitars')
+            ->where('ocultar', '=',1)->get();
+            return view('admin.coordenadores.mostraOculta',compact('solicitars'));
+    }
+
      public function storeSolicita(Request $request)
     {   
 

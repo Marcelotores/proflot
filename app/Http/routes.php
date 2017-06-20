@@ -34,7 +34,9 @@ DB::listen(function($sql, $bindings, $time) {
 });
 
 
-
+Route::get('/', function () {
+	return view('admin.users.login');
+});
 Route::group(['prefix'=>'admin', 'as'=>'admin.'], function(){
 /*-----------------------------------logs-------------------------------------------------------------------*/
 Route::get('logs', function () {
@@ -42,7 +44,7 @@ Route::get('logs', function () {
 });
 /*---------------------------------------admin-----------------------------------------------------------------*/
 Route::get('', function () {
-		return view('menu');
+		return view('home');
 });
 /*-----------------------------Disciplinas------------------------------------------------------------------*/
 Route::get('disciplinas/index',['as'=>'disciplinas.index', 'uses'=>'DisciplinaController@index']);
@@ -55,6 +57,7 @@ Route::get('disciplinas/show/{id}',['as'=>'disciplinas.show', 'uses'=>'Disciplin
 
 //Retorna as disciplinas por periodo
 Route::get('disciplinas/periodo/{id}',['as'=>'disciplinas.periodo', 'uses'=>'DisciplinaController@getDisciplinasByPeriodo']);
+Route::post('disciplinas/periodos',['as'=>'disciplinas.periodos', 'uses'=>'DisciplinaController@DisciplinasByPeriodo']);
 
 
 /*----------------------------Lotacao-------------------------------------------------------------------*/
@@ -74,8 +77,8 @@ Route::post('users/update/{id}',['as'=>'users.update', 'uses'=>'UserController@u
 Route::get('users/statu/{id}',['as'=>'users.status', 'uses'=>'UserController@status']);
 Route::get('users/show/{id}',['as'=>'users.show', 'uses'=>'UserController@show']);
 Route::get('users/showProfile/{id}',['as'=>'users.showProfile', 'uses'=>'UserController@showProfile']);
-
-
+Route::get('users/senha/{id}',['as'=>'users.alterarSenha', 'uses'=>'UserController@alterarSenha']);
+Route::post('users/updateSenha/{id}',['as'=>'users.updateSenha', 'uses'=>'UserController@updateSenha']);
 
 Route::get('entrar',['as'=>'login.index', 'uses'=>'LoginController@index']);
 
@@ -88,7 +91,7 @@ Route::get('salas/novo',['as'=>'salas.create', 'uses'=>'SalaController@create'])
 Route::post('salas/store',['as'=>'salas.store', 'uses'=>'SalaController@store']);
 Route::get('salas/editar/{id}',['as'=>'salas.edit', 'uses'=>'SalaController@edit']);
 Route::post('salas/update/{id}',['as'=>'salas.update', 'uses'=>'SalaController@update']);
-Route::get('salas/destroy/{id}',['as'=>'salas.destroy', 'uses'=>'SalaController@destroy']);
+Route::get('salas/status/{id}',['as'=>'salas.status', 'uses'=>'SalaController@status']);
 Route::get('salas/show/{id}',['as'=>'salas.show', 'uses'=>'SalaController@show']);
 
 
@@ -107,7 +110,8 @@ Route::get('coordenadores/solicita/mostra',['as'=>'coordenadores.solicita.mostra
 Route::get('coordenadores/visualizar/solicita/{id}',['as'=>'coordenadores.visualizar.solicita', 'uses'=>'CoordenadorController@visualiza']);
 Route::get('coordenadores/resolvido/{id}',['as'=>'coordenadores.ocultar', 'uses'=>'CoordenadorController@ocultar']);
 Route::post('coordenadores/resposta/{id}',['as'=>'cordenadores.resposta', 'uses'=>'CoordenadorController@resposta']);
-
+Route::get('coordenadores/solicita/resolvidas',['as'=>'coordenadores.mostraOculta', 'uses'=>'CoordenadorController@mostraOculta']);
+Route::get('coordenadores/relatorio',['as'=>'coordenadores.relatorio', 'uses'=>'CoordenadorController@relatorio']);
 /*-----------------------------Professores----------------------------------------------------------*/
 Route::get('professores/index',['as'=>'professores.index', 'uses'=>'ProfessorController@index']);
 Route::get('professores/novo',['as'=>'professores.create', 'uses'=>'ProfessorController@create']);

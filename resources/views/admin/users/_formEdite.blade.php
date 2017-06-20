@@ -1,24 +1,19 @@
 <div class="col-xs-10 col-md-offset-1 btn-group btn-group-justified" role="group" aria-label="..."> 
-	<div class="col-xs-6  ">
+	<div class="col-xs-12  ">
 		<div class="forme-grup">
 			{!! Form::label('Name','Nome:') !!}
 			{!! Form::text('name',null,['class'=>'form-control']) !!}
-		</div>
-	</div>
-	<div class="col-xs-6  ">
-		<div class="forme-grup">
-			{!! Form::label('Email','E-mail:') !!}
-			{!! Form::email('email',null,['class'=>'form-control']) !!}
 		</div>
 	</div>
 </div>
 <div class="col-xs-10 col-md-offset-1 btn-group btn-group-justified" role="group" aria-label="..."> 
 	<div class="col-xs-6  ">
 		<div class="forme-grup">
-			{!! Form::label('Password','Senha:') !!}
-			{!! Form::password('password',['class'=>'form-control']) !!}
+			{!! Form::label('Email','E-mail:') !!}
+			{!! Form::email('email',null,['class'=>'form-control']) !!}
 		</div>
 	</div>
+
 	<div class="col-xs-6  ">
 		<div class="forme-grup">
 			{!! Form::label('CPF','CPF:') !!}

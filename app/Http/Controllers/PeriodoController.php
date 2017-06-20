@@ -21,6 +21,7 @@ class PeriodoController extends Controller
     public function __construct(PeriodoRepository $repository){
 
             $this->repository = $repository;
+            $this->middleware('auth');
     }
 
     public function index()

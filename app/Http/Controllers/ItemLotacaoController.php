@@ -38,6 +38,7 @@ class ItemLotacaoController extends Controller
         $this->disciplinaRepository = $disciplinaRepository;
         $this->salaRepository = $salaRepository; 
         $this->periodoRepository = $periodoRepository; 
+        $this->middleware('auth');
 
     }
 

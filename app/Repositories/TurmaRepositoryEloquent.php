@@ -78,7 +78,7 @@ class TurmaRepositoryEloquent extends BaseRepository implements TurmaRepository
 
 
         if (isset($valor)) {
-            return "Dia e horário indisponível! A turma $valor já está usando a sala $sal->number $d->dia e no horário $h->letra! ";
+            return " <div> <p>Dia e horário indisponível! A turma $valor já está usando a sala $sal->number $d->dia e no horário $h->letra!</p></div> ";
         }
         else {
              foreach ($dias as $dia) {

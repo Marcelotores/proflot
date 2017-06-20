@@ -22,6 +22,7 @@ class UserController extends Controller
          $this->tipoRepository = $tipoRepository;
          $this->repository = $repository;
          $this->cursoRepository = $cursoRepository;
+         $this->middleware('auth');
         
     }
    
@@ -31,9 +32,11 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
+    {  
+    
+
         $users = $this->repository->paginate(5);
-        return view('admin.users.index',compact('users'));
+        return view('admin.users.index',compact('users','id'));
     }
     /**
      * Show the form for creating a new resource.
@@ -54,7 +57,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-         
+        $id = Auth::user()->curso_id;
          
         User::create([
             'name' => $request['name'],
@@ -67,9 +70,9 @@ class UserController extends Controller
            'tipo_id'=>$request['tipo_id'],
            'regiment'=>$request['regiment'],
            'lates'=>$request['lates'],
-           'curso_id'=>$request['curso_id']
+           'curso_id'=>$id,
         ]);
-        return redirect()->route('admin.coordenadores.index');
+        return redirect()->route('admin.users.index');
     }
     /**
      * Display the specified resource.
@@ -79,9 +82,12 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        $user = $this->repository->find($id);
-        $tipos = $this->tipoRepository->find($id)->lists('description','id');
-        return view('admin.users.visualizar',compact('user','tipos'));
+         $user = $this->repository->find($id);
+         $tipos_id = $this->repository->find($id)->tipo_id;
+         $cursos_id = $this->repository->find($id)->curso_id;
+         $tipos = $this->tipoRepository->find($tipos_id)->description;
+         $cursos = $this->cursoRepository->find($cursos_id)->description;
+        return view('admin.users.visualizar',compact('user','tipos','cursos'));
     }
     /**
      * Show the form for editing the specified resource.
@@ -95,6 +101,20 @@ class UserController extends Controller
         $tipos = $this->tipoRepository->find($id)->lists('description','id');
         return view('admin.users.edit',compact('user','tipos'));
     }
+
+     public function alterarSenha($id){
+             
+       $user = $this->repository->find($id);
+        return view('admin.users.editSenha',compact('user'));
+            
+
+     }
+     public function updateSenha(Request $request, $id){
+        
+         $this->repository->update($request['password'],$id);
+         return view('/home');
+
+     }
     /**
      * Update the specified resource in storage.
      *
@@ -104,7 +124,7 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $data->$request->all();
+        $data = $request->all();
         $this->repository->update($data,$id);
         return redirect()->route('admin.users.index');
     }
