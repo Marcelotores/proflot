@@ -16,6 +16,7 @@ class SalaController extends Controller
       public function  __construct(SalaRepository $repository)
     {
         $this->repository = $repository;
+        $this->middleware('auth');
     
     }
 
@@ -101,6 +102,21 @@ class SalaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    public function status($id)
+    {
+         $status = $this->repository->find($id)->active;
+          if($status == 0)
+          {
+            
+            $this->repository->update(['active'=> 1],$id);
+            return redirect()->route('admin.salas.index');
+          }
+          if($status == 1)
+          {
+            $this->repository->update(['active'=> 0], $id);
+            return redirect()->route('admin.salas.index');
+          }
+    }
     public function destroy($id)
     {
         $sala = Sala::find($id);

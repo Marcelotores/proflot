@@ -55,8 +55,8 @@
                   <!-- Banner -->
                   
                 <li class="">
-                    <a href="#">
-                        <span class="menu-icon pull-right hidden-xs showopacity glyphicon material-icons" style="font-size:36px">recent_actors</span>Professor
+                    <a href="/home">
+                        <span class="menu-icon pull-right hidden-xs showopacity glyphicon material-icons" style="font-size:36px">home</span>Home
                     </a>
 
                 </li>
@@ -67,7 +67,7 @@
 
                 </li>
                 <li class="">
-                    <a href="#">
+                    <a href="{{route('admin.coordenadores.relatorio')}}">
                         <span class="menu-icon pull-right hidden-xs showopacity glyphicon material-icons" style="font-size:36px">perm_media</span>Relatorios
                     </a>
 
@@ -84,7 +84,7 @@
 
             </li>
             <li class="">
-                <a href="{{route('admin.coordenadores.solicitar')}}">
+                <a href="{{route('admin.coordenadores.solicita.mostra')}}">
                     <span class="menu-icon pull-right hidden-xs showopacity glyphicon material-icons" style="font-size:36px">device_hub</span>Solicitação
                 </a>
 
@@ -97,7 +97,7 @@
             </a>
             <ul class="dropdown-menu forAnimate" role="menu">
                 <li><a href="{{Route('admin.users.create')}}"><i class="material-icons">add</i>Usuario</a></li>
-                <li><a href="{{Route('admin.users.index')}}"><i class="material-icons">add</i> Todos</a></li>
+                <li><a href="{{Route('admin.users.index')}}"><i class="material-icons">account_circle</i> Todos</a></li>
 
             </ul>
         </li>
@@ -130,29 +130,11 @@
                 <a class="navbar-brand" href="#"></a>
             </div>
 
-            <div class="collapse navbar-collapse" id="navbar">
-                <ul class="nav navbar-nav">
+                 <div class="collapse navbar-collapse nav navbar-nav navbar-right" id="navbar">
                 
-                </ul>
-
-                <ul class="nav navbar-nav navbar-right">
-                    @if(auth()->guest())
-                        @if(!Request::is('auth/login'))
-                            <li><a href="{{route('admin.login.index')}}">Login</a></li>
-                        @endif
-                        @if(!Request::is('auth/register'))
-                            <li><a href="{{ route('admin.users.create') }}">Register</a></li>
-                        @endif
-                    @else
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ auth()->user()->name }} <span class="caret"></span></a>
-                            <ul class="dropdown-menu" role="menu">
-                                <li><a href="/logout">Logout</a></li>
-                            </ul>
-                        </li>
-                    @endif
-                </ul>
+                    
             </div>
+
         </div>
     </nav>
 

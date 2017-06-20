@@ -18,6 +18,7 @@ class TipoController extends Controller
     public function __construct( TipoRepository $repository){
 
             $this->repository = $repository;
+            $this->middleware('auth');
     }
 
     /**

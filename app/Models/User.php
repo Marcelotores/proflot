@@ -44,4 +44,10 @@ class User extends Model implements AuthenticatableContract,
          return $this->hasMany(Turma::class);
           // ou seja, um usuario possui varias turmas	
     }
+
+      public function tipo(){
+         return $this->belongsTo(Tipo::class);
+          // ou seja, uma usuario pertence a um tipo.   
+     } 
+    
 }

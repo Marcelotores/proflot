@@ -24,6 +24,7 @@ class DisciplinaController extends Controller
         $this->repository = $repository;
         $this->periodoRepository = $periodoRepository;
         $this->fluxoRepository =$fluxoRepository;
+        $this->middleware('auth');
     }
 
     /**
@@ -34,7 +35,8 @@ class DisciplinaController extends Controller
     public function index()
     {
         $disciplinas = $this->repository->paginate(5);
-        return view('admin.disciplinas.index',compact('disciplinas'));
+        $periodos = $this->periodoRepository->lists('description', 'id');
+        return view('admin.disciplinas.index',compact('disciplinas','periodos'));
 
     }
 
@@ -42,6 +44,16 @@ class DisciplinaController extends Controller
         $disciplinas = DB::table('disciplinas')
         ->where('periodo_id', '=', $periodo)->get();
         return $disciplinas;
+    }
+     public function DisciplinasByPeriodo(Request $request) {
+        $id = $request['id'];
+        if(!empty($id)){
+            $disciplinas = DB::table('disciplinas')
+            ->where('periodo_id', '=', $id)->get();
+            $periodos = $this->periodoRepository->lists('description', 'id');
+            return view('admin.disciplinas.index',compact('disciplinas','periodos'));
+        }
+        return redirect()->route('admin.disciplinas.index');
     }
 
     /**
@@ -89,7 +101,6 @@ class DisciplinaController extends Controller
     {
     
         $disciplina = $this->repository->find($id);
-
         return view('admin.disciplinas.show',compact('disciplina'));  
     }
 

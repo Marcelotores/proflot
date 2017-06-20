@@ -1,28 +1,33 @@
-@extends('app')
+@extends('menu')
 
 
 @section('content')
+
 <div class="container">
-     <h3>Nova Sala</h3>
-       
-         <div class="row">
-           @include('errors._errors')
-           
-              <div class="col-xs-12 col-md-8">
-                {!! Form::open(['route'=>'admin.salas.store','class'=>'form']) !!}
+  <div class="row">
+    <div class="col-md-8 col-md-offset-1">
+      <div class="panel panel-default col-md-19 ">
+        <div class="panel-heading" style="color:#527a9d">Nova Sala</div>
+        <div class="panel-body">
+         @include('errors._errors')
 
-                    @include('admin.salas._form') <!-- Refatorando o form --> 
+         <div class="col-xs-12 col-md-8">
+          {!! Form::open(['route'=>'admin.salas.store','class'=>'form']) !!}
 
-                   <div class="forme-grup">
-                    {!! Form::submit('Salvar',['class'=>'btn btn-primary']) !!}
-                    
-                  </div> 
-                  
-                {!! Form::close() !!}
-                 
-                </div>
+          @include('admin.salas._form') <!-- Refatorando o form --> 
+
+          <div class="forme-grup">
+            {!! Form::submit('Salvar',['class'=>'btn btn-primary']) !!}
+
+          </div> 
+
+          {!! Form::close() !!}
 
         </div>
+      </div>
+    </div>
+  </div>
+</div>
 </div>   
 
 
